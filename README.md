@@ -53,9 +53,9 @@ has_one    :shipping_info
 | postal_code        | string     | null: false |
 | prefecture_id      | integer    | null: false |
 | city               | string     | null: false |
-| addresses          | string     | null: false, foreign_key: true |
-| building           | string     | null: false, foreign_key: true |
-| phone_number       | string     | null: false, foreign_key: true |
+| addresses          | string     | null: false |
+| building           | string     | null: false |
+| phone_number       | string     | null: false |
 | order              | references | null: false, foreign_key: true |
 
 Association
