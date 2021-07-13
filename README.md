@@ -54,7 +54,7 @@ has_one    :shipping_info
 | prefecture_id      | integer    | null: false |
 | city               | string     | null: false |
 | addresses          | string     | null: false |
-| building           | string     | null: false |
+| building           | string     | |
 | phone_number       | string     | null: false |
 | order              | references | null: false, foreign_key: true |
 
