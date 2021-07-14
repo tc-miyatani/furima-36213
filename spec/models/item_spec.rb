@@ -69,7 +69,7 @@ RSpec.describe Item, type: :model do
     @item.valid?
     expect(@item.errors.full_messages).to include("Prefecture can't be blank")
   end
-  
+
   it '発送元の地域の値は0ではいけないこと' do
     @item.prefecture_id = 0
     @item.valid?
@@ -101,24 +101,23 @@ RSpec.describe Item, type: :model do
   it '価格が¥300未満だと出品できないこと' do
     @item.price = 299
     @item.valid?
-    expect(@item.errors.full_messages).to include("Price is out of setting range")
+    expect(@item.errors.full_messages).to include('Price is out of setting range')
   end
 
   it '価格が¥9999999だと出品できること' do
-    @item.price = 9999999
+    @item.price = 9_999_999
     expect(@item).to be_valid
   end
 
   it '価格が¥9999999超だと出品できないこと' do
-    @item.price = 10000000
+    @item.price = 10_000_000
     @item.valid?
-    expect(@item.errors.full_messages).to include("Price is out of setting range")
+    expect(@item.errors.full_messages).to include('Price is out of setting range')
   end
 
   it '価格に全角数値を含むと出品できないこと' do
     @item.price = '1２３４5'
     @item.valid?
-    expect(@item.errors.full_messages).to include("Price before type cast is invalid. Input half-width characters")
+    expect(@item.errors.full_messages).to include('Price before type cast is invalid. Input half-width characters')
   end
-
 end
