@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :items
+
   # 半角英数両方とも含む必要がある
   validates :password, format: {
     with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i,
