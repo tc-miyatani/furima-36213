@@ -14,7 +14,7 @@ class User < ApplicationRecord
     validates :birth_date
     # 全角（漢字・ひらがな・カタカナ）
     with_options format: {
-      with: /\A[ぁ-んァ-ン一-龥]/,
+      with: /\A[ぁ-んァ-ン一-龥]+\z/,
       message: 'is invalid. Input full-width characters'
     } do
       validates :last_name
