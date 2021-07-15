@@ -124,6 +124,18 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Price before type cast is invalid. Input half-width characters')
     end
 
+    it '価格が半角英数字混合では出品できないこと' do
+      @item.price = 'abc123'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price before type cast is invalid. Input half-width characters')
+    end
+
+    it '価格が半角英字のみでは出品できないこと' do
+      @item.price = 'abcde'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price before type cast is invalid. Input half-width characters')
+    end
+
     it 'userが紐付いていないと出品できないこと' do
       @item.user = nil
       @item.valid?
