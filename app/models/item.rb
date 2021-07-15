@@ -14,19 +14,23 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :info
+    validates :user
+    validates :price
+  end
 
-    validates :price_before_type_cast, format: {
-      with: /\A[0-9]+\z/,
-      message: 'is invalid. Input half-width characters'
-    }
-    validates :price, numericality: {
-      only_integer: true,
-      greater_than_or_equal_to: 300,
-      less_than_or_equal_to: 9_999_999,
-      message: 'is out of setting range'
-    }
+  validates :price_before_type_cast, format: {
+    with: /\A[0-9]+\z/,
+    message: 'is invalid. Input half-width characters'
+  }
 
-    with_options numericality: {
+  validates :price, numericality: {
+    only_integer: true,
+    greater_than_or_equal_to: 300,
+    less_than_or_equal_to: 9_999_999,
+    message: 'is out of setting range'
+  }
+
+  with_options presence: true, numericality: {
       other_than: 0,
       message: "can't be blank"
     } do
@@ -35,8 +39,5 @@ class Item < ApplicationRecord
       validates :shipping_fee_status_id
       validates :prefecture_id
       validates :scheduled_delivery_id
-    end
-
-    validates :user
   end
 end
