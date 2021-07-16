@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
   before_action :sales_user!, only: [:edit, :update]
 
   def index
@@ -20,7 +21,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
@@ -46,8 +46,11 @@ class ItemsController < ApplicationController
       ).merge(user_id: current_user.id)
   end
 
-  def sales_user!
+  def set_item
     @item = Item.find(params[:id])
+  end
+
+  def sales_user!
     redirect_to root_path unless @item.user_id == current_user.id
   end
 end
