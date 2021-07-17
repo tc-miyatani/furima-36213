@@ -19,7 +19,8 @@ class PayForm
     validates :addresses
     validates :phone_number, length: {
       in: 10..11,
-      message: 'is too short'
+      too_short: 'is too short',
+      too_long: 'is too long'
     }, format: {
       with: /\A\d+\z/,
       message: 'is invalid. Input only number'
