@@ -115,19 +115,11 @@ RSpec.describe PayForm, type: :model do
         expect(@pay_form.errors.full_messages).to include("User can't be blank")
       end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      it 'payjpのtokenが空だと購入できないこと' do
+        @pay_form.token = ''
+        @pay_form.valid?
+        expect(@pay_form.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
