@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
   def create
     @pay_form = PayForm.new(pay_form_params)
-    if @pay_form.valid? 
+    if @pay_form.valid?
       pay_item
       @pay_form.save
       redirect_to root_path
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: @pay_form.token,
@@ -47,6 +47,6 @@ class OrdersController < ApplicationController
   end
 
   def buyable!
-    redirect_to root_path if @item.user_id == current_user.id || @item.order.present? 
+    redirect_to root_path if @item.user_id == current_user.id || @item.order.present?
   end
 end
