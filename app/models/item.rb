@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :scheduled_delivery
 
   belongs_to :user
+  has_one    :order
 
   with_options presence: true do
     validates :image
