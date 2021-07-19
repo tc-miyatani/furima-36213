@@ -61,6 +61,18 @@ RSpec.describe PayForm, type: :model do
         expect(@pay_form.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
+      it '都道府県が必須であること' do
+        @pay_form.prefecture_id = nil
+        @pay_form.valid?
+        expect(@pay_form.errors.full_messages).to include("Prefecture can't be blank")
+      end
+
+      it '都道府県が0だと登録できないこと' do
+        @pay_form.prefecture_id = 0
+        @pay_form.valid?
+        expect(@pay_form.errors.full_messages).to include("Prefecture can't be blank")
+      end
+
       it '市区町村が必須であること' do
         @pay_form.city = ''
         @pay_form.valid?
