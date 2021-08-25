@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  has_one_attached :image
+  has_one_attached :image, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :scheduled_delivery
 
   belongs_to :user
-  has_one    :order
+  has_one    :order, dependent: :destroy
 
   with_options presence: true do
     validates :image
